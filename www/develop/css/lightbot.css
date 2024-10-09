@@ -527,3 +527,26 @@ li.ui-draggable-dragging {
   right: 40px;
   width: 400px;
 }
+
+.floating-window {
+  position: fixed; /* Mantiene la ventana en la misma posición incluso al hacer scroll */
+  top: 300px; /* Posiciona en el extremo superior */
+  left: 0; /* Posiciona en el extremo izquierdo */
+  width: 100%; /* Ancho de la ventana flotante */
+  height: 200px; /* Alto de la ventana flotante */
+  background-color: rgb(224, 35, 35); /* Color de fondo de la ventana */
+  border: 2px solid #ccc; /* Borde de la ventana */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Añade una sombra para dar efecto de flotación */
+  z-index: 1000; /* Asegura que la ventana esté en la parte superior del contenido */
+  padding: 20px; /* Añade un poco de espacio interno */
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.floating-window h2 {
+  color:#fff;
+  font-size: 90px;
+  width: 100%;
+  text-align: center;
+}

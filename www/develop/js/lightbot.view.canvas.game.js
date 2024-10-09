@@ -2,6 +2,18 @@
 /*jsl:import lightbot.model.game.js*/
 
 var canvasView = function(canvas) {
+  $('#floating-window').fadeOut();
+ // $('#floating-window').css('opacity', 1);
+  //$('#floating-window').fadeIn();
+  var attempt = 3;
+  $('#attempt').text(attempt);
+  window.addEventListener('attempt', () => {
+    attempt--;
+    $('#attempt').text(attempt);
+    if (attempt === 0) {
+      window.location.href = window.location.href;
+    }
+  })
   // set the rendering context
   lightBot.ctx = canvas.get(0).getContext('2d');
 

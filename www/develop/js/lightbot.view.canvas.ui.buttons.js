@@ -2,7 +2,6 @@
 /*jsl:import lightbot.model.game.js*/
 
 $(document).ready(function() {
-
   // show help screen button
   $('.helpButton').button({
     icons: {
@@ -64,15 +63,17 @@ $(document).ready(function() {
     }
   }).click(function() {
     if (lightBot.bot.isInExecutionMode()) {
-      // reset the map (resets the bot as well)
       lightBot.map.reset();
-
+      const event = new CustomEvent('attempt', {detail: {instructions}});
+      window.dispatchEvent(event);
+      $('#floating-window').fadeIn(500, () => {
+        $('#floating-window').fadeOut(500);
+      });
       $(this).button('option', {label: 'Run', icons: {primary: 'ui-icon-play'}}).removeClass('ui-state-highlight');
     } else {
       var instructions = lightBot.ui.editor.getInstructions($('#programContainer > div > ul > li'));
       lightBot.bot.queueInstructions(instructions);
       lightBot.bot.execute();
-
       $(this).button('option', {label: 'Stop', icons: {primary: 'ui-icon-stop'}}).addClass('ui-state-highlight');
     }
   });

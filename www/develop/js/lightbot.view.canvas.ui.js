@@ -81,6 +81,9 @@
       $('#levelSelectScreen').show();
     },
     showGameScreen: function(level, hist) {
+      $('#floating-window').fadeIn(500, () => {
+        $('#floating-window').fadeOut(500);
+      });
       lightBot.ui.media.playGameAudio();
 
       // load the map
