@@ -1,4 +1,47 @@
-<!DOCTYPE html>
+const fs = require('fs-extra');
+const path = require('path');
+const chalk = require('chalk');
+
+async function copyAssets() {
+    console.log(chalk.blue('📋 Copiando assets...'));
+
+    const developDir = path.join(process.cwd(), 'www', 'develop');
+    const mediaDir = path.join(process.cwd(), 'www', 'media');
+    const deployDir = path.join(process.cwd(), 'deploy');
+
+    try {
+        // Copiar imágenes
+        const imgSource = path.join(developDir, 'img');
+        const imgTarget = path.join(deployDir, 'img');
+
+        if (await fs.pathExists(imgSource)) {
+            await fs.copy(imgSource, imgTarget);
+            console.log(chalk.gray(`  ✓ Copiadas imágenes`));
+        }
+
+        // Copiar media (audio y video)
+        const mediaTarget = path.join(deployDir, 'media');
+
+        if (await fs.pathExists(mediaDir)) {
+            await fs.copy(mediaDir, mediaTarget);
+            console.log(chalk.gray(`  ✓ Copiados archivos multimedia`));
+        }
+
+        // Crear index.html optimizado para producción
+        await createProductionHTML();
+
+        console.log(chalk.green(`✅ Assets copiados exitosamente`));
+
+    } catch (error) {
+        console.error(chalk.red('❌ Error copiando assets:'), error.message);
+        process.exit(1);
+    }
+}
+
+async function createProductionHTML() {
+    console.log(chalk.blue('📝 Generando index.html de producción...'));
+
+    const htmlTemplate = `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -190,4 +233,11 @@
       </div>
     </div>
   </body>
-</html>
+</html>`;
+
+    const outputPath = path.join(process.cwd(), 'deploy', 'index.html');
+    await fs.writeFile(outputPath, htmlTemplate);
+    console.log(chalk.gray(`  ✓ Generado index.html de producción`));
+}
+
+copyAssets();

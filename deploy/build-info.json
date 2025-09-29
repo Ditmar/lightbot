@@ -1,0 +1,11 @@
+{
+  "version": "0.9.0",
+  "buildTime": "2025-09-29T03:05:34.848Z",
+  "buildNumber": 1759115134849,
+  "environment": "development",
+  "files": {
+    "css": "css/lightbot.min.css",
+    "js": "js/lightbot.min.js",
+    "html": "index.html"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "lightbot-game",
+  "type": "module",
+  "build": {
+    "command": "echo 'No build step needed - using existing assets'",
+    "publishDir": "deploy"
+  },
+  "functions": {
+    "server": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
